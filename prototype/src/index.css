@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Brand tokens, sampled from the Instagram logo: pale frost-mint disc + dark slate mark. */
+@theme {
+  --color-frost: #dbe7e3;
+  --color-frost-50: #f3f7f5;
+  --color-frost-100: #e8f0ed;
+  --color-frost-300: #c4d6d0;
+  --color-slate: #2f3b42;
+  --color-slate-700: #3c4a52;
+  --color-slate-900: #1f282d;
+  --color-pine: #3d6b55;
+  --color-pine-600: #2f5644;
+  --color-spruce: #7fa7b3;
+  --color-berry: #c8553d;
+  --color-gold: #d9a441;
+
+  --font-sans: "Onest", ui-sans-serif, system-ui, sans-serif;
+  --font-slab: "Roboto Slab", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-frost-50 text-slate font-sans antialiased;
+}
+
+@keyframes snowfall {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
