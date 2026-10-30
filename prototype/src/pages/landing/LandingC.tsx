@@ -91,7 +91,7 @@ export function LandingC() {
           const dark = c.kind !== "snow";
           return (
             <section key={c.kind} className={`${CHAPTER_BG[c.kind]} relative`}>
-              <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1fr_1.15fr]">
+              <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-16 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
                 <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center">
                   <p className="font-mono text-sm opacity-50">0{i + 1} / 03</p>
                   <h2 className="mt-3 font-slab text-5xl font-extrabold md:text-6xl">{c.title}</h2>
@@ -111,7 +111,7 @@ export function LandingC() {
 
       {/* Why us */}
       <section id="c-why" className="bg-frost-50 text-slate">
-        <div className="mx-auto max-w-7xl px-6 py-28">
+        <div className="mx-auto max-w-7xl px-6 py-16 sm:py-28">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-pine">Чому клієнти обирають нас</p>
           <p className="mt-4 font-slab text-7xl font-extrabold leading-none md:text-[10rem]">{HAPPY_CLIENTS.toLocaleString("uk-UA")}</p>
           <p className="mt-2 text-xl text-slate/60">задоволених родин уже прикрасили свої оселі</p>
@@ -130,7 +130,7 @@ export function LandingC() {
       {/* Reviews in a phone */}
       <section id="c-reviews" className="relative overflow-hidden bg-slate text-frost">
         <Snow count={30} />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 py-28 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 sm:py-28 lg:grid-cols-2">
           <div>
             <h2 className="font-slab text-5xl font-extrabold">Тільки реальні відгуки клієнтів</h2>
             <p className="mt-4 text-lg text-frost/60">Пишуть нам в Direct {CONTACTS.instagram} щодня. Ось кілька повідомлень.</p>
@@ -174,7 +174,7 @@ export function LandingC() {
 
       {/* Countdown CTA */}
       <section className="bg-berry text-white">
-        <div className="mx-auto max-w-6xl px-6 py-20 text-center">
+        <div className="mx-auto max-w-6xl px-6 py-14 sm:py-20 text-center">
           <p className="text-sm font-bold uppercase tracking-[0.3em] opacity-80">Поспішайте! Ціни зростуть через</p>
           <div className="mt-6 flex justify-center gap-3 md:gap-6">
             {[

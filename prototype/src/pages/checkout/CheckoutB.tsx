@@ -17,7 +17,7 @@ export function CheckoutB({ c }: { c: Checkout }) {
   const canNext = [c.cart.lines.length > 0, f.name.trim() && f.phone.trim(), f.delivery === "courier" ? f.address.trim() : f.branch, true][step];
 
   return (
-    <main className="mx-auto max-w-xl px-6 py-8">
+    <main className="mx-auto max-w-xl px-4 py-6 sm:px-6 sm:py-8">
       {/* progress */}
       <ol className="mb-8 grid grid-cols-4 gap-2">
         {STEPS.map((s, i) => (
@@ -70,7 +70,7 @@ export function CheckoutB({ c }: { c: Checkout }) {
             </Field>
             <Field label="Телефон">
               <div className="flex">
-                <span className="flex items-center rounded-l-xl bg-frost px-3 text-sm font-semibold ring-1 ring-slate/15">🇺🇦 +380</span>
+                <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-l-xl bg-frost px-3 text-sm font-semibold ring-1 ring-slate/15">🇺🇦 +380</span>
                 <input value={f.phone} onChange={(e) => set("phone", e.target.value)} placeholder="(00) 000-00-00" className={`${inputCls} rounded-l-none`} />
               </div>
             </Field>

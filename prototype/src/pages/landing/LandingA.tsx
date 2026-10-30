@@ -95,7 +95,7 @@ export function LandingA() {
       </section>
 
       {/* Catalog shelves */}
-      <section id="catalog" className="mx-auto max-w-7xl scroll-mt-20 px-6 pt-24">
+      <section id="catalog" className="mx-auto max-w-7xl scroll-mt-20 px-6 pt-16 sm:pt-24">
         <h2 className="max-w-3xl font-slab text-3xl font-extrabold md:text-4xl">
           Мега розпродаж продовжено. <span className="text-berry">Кількість обмежена!</span>
         </h2>
@@ -113,11 +113,11 @@ export function LandingA() {
                 <h3 className="font-slab text-2xl font-bold md:text-3xl">{c.title}</h3>
                 <p className="mt-1 text-slate/60">{c.tagline}</p>
               </div>
-              <span className="text-sm text-slate/40">{PRODUCTS.filter((p) => p.kind === c.kind).length} моделі</span>
+              <span className="shrink-0 whitespace-nowrap text-sm text-slate/40">{PRODUCTS.filter((p) => p.kind === c.kind).length} моделі</span>
             </div>
-            <div className="no-scrollbar -mx-6 flex snap-x gap-5 overflow-x-auto px-6 pb-2">
+            <div className="no-scrollbar -mx-6 flex snap-x scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 sm:gap-5">
               {PRODUCTS.filter((p) => p.kind === c.kind).map((p) => (
-                <div key={p.slug} className="w-[290px] shrink-0 snap-start">
+                <div key={p.slug} className="w-[78vw] max-w-[290px] shrink-0 snap-start">
                   <ProductCard product={p} />
                 </div>
               ))}
@@ -127,7 +127,7 @@ export function LandingA() {
       </section>
 
       {/* Why us — bento */}
-      <section id="why" className="mx-auto max-w-7xl scroll-mt-20 px-6 pt-28">
+      <section id="why" className="mx-auto max-w-7xl scroll-mt-20 px-6 pt-16 sm:pt-28">
         <div className="grid gap-5 md:grid-cols-3">
           <div className="flex flex-col justify-between rounded-3xl bg-slate p-8 text-frost md:row-span-3">
             <h2 className="font-slab text-3xl font-extrabold">Чому клієнти обирають нас?</h2>
@@ -147,7 +147,7 @@ export function LandingA() {
       </section>
 
       {/* Reviews marquee */}
-      <section id="reviews" className="scroll-mt-20 overflow-hidden py-28">
+      <section id="reviews" className="scroll-mt-20 overflow-hidden py-16 sm:py-28">
         <div className="mx-auto mb-10 max-w-7xl px-6">
           <h2 className="font-slab text-3xl font-extrabold md:text-4xl">Тільки реальні відгуки клієнтів</h2>
           <p className="mt-2 text-slate/60">Зі скриньки {CONTACTS.instagram} — без редагування.</p>

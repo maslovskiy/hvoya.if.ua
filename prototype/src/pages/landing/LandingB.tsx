@@ -209,7 +209,7 @@ export function LandingB() {
       </section>
 
       {/* Why us — comparison table */}
-      <section id="b-why" className="scroll-mt-32 bg-white py-20">
+      <section id="b-why" className="scroll-mt-32 bg-white py-14 sm:py-20">
         <div className="mx-auto max-w-5xl px-6">
           <div className="mb-10 text-center">
             <h2 className="font-slab text-3xl font-extrabold md:text-4xl">Чому клієнти обирають нас?</h2>
@@ -240,7 +240,7 @@ export function LandingB() {
       </section>
 
       {/* Reviews wall */}
-      <section id="b-reviews" className="mx-auto max-w-7xl scroll-mt-32 px-6 py-20">
+      <section id="b-reviews" className="mx-auto max-w-7xl scroll-mt-32 px-6 py-14 sm:py-20">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-slab text-3xl font-extrabold">Тільки реальні відгуки клієнтів</h2>
           <div className="flex items-center gap-3 rounded-2xl bg-white px-5 py-3 ring-1 ring-slate/5">

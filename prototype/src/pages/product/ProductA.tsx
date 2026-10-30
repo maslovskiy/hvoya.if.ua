@@ -41,27 +41,27 @@ export function ProductA({ product }: { product: Product }) {
   const cat = CATEGORIES.find((c) => c.kind === product.kind)!;
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pb-24 pt-6">
-      <nav className="mb-6 text-sm text-slate/50">
+    <main className="mx-auto max-w-7xl px-4 pb-24 pt-4 sm:px-6 sm:pt-6">
+      <nav className="mb-4 truncate text-sm text-slate/50 sm:mb-6">
         <Link to={to("/")} className="hover:text-slate">Головна</Link> / <span>{cat.title}</span> / <span className="text-slate">{product.name}</span>
       </nav>
-      <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-10">
         {/* Gallery */}
-        <div className="flex flex-col-reverse gap-3 md:flex-row">
+        <div className="flex min-w-0 flex-col-reverse gap-3 md:flex-row">
           <div className="no-scrollbar flex gap-3 overflow-x-auto md:flex-col">
             {GALLERY.map((g, i) => (
               <button
                 key={g.label}
                 type="button"
                 onClick={() => setImg(i)}
-                className={`h-24 w-20 shrink-0 overflow-hidden rounded-xl ring-2 transition ${i === img ? "ring-slate" : "ring-transparent opacity-70 hover:opacity-100"}`}
+                className={`h-20 w-16 shrink-0 overflow-hidden rounded-xl md:h-24 md:w-20 ring-2 transition ${i === img ? "ring-slate" : "ring-transparent opacity-70 hover:opacity-100"}`}
                 aria-label={g.label}
               >
                 {g.render(product)}
               </button>
             ))}
           </div>
-          <div className="relative aspect-[4/5] flex-1 overflow-hidden rounded-3xl">
+          <div className="relative aspect-[4/5] min-w-0 flex-1 overflow-hidden rounded-3xl">
             {GALLERY[img].render(product)}
             {product.badge && (
               <span className="absolute left-5 top-5">
@@ -85,11 +85,11 @@ export function ProductA({ product }: { product: Product }) {
         </div>
 
         {/* Buy box */}
-        <div className="lg:sticky lg:top-24 lg:h-max">
+        <div className="min-w-0 lg:sticky lg:top-24 lg:h-max">
           <div className="flex items-center gap-2 text-sm">
             <Stars /> <span className="text-slate/50">4,9 · 128 відгуків</span>
           </div>
-          <h1 className="mt-3 font-slab text-3xl font-extrabold leading-tight md:text-4xl">{product.name}</h1>
+          <h1 className="mt-3 font-slab text-2xl font-extrabold leading-tight sm:text-3xl md:text-4xl">{product.name}</h1>
           <p className="mt-3 text-slate/60">{product.blurb}</p>
           <Price product={product} size={size} className="mt-6 [&>span:first-child]:text-3xl" />
           <div className="mt-6">
@@ -150,13 +150,15 @@ export function ProductA({ product }: { product: Product }) {
         </div>
       </div>
 
-      <section className="mt-24">
+      <section className="mt-16 sm:mt-24">
         <h2 className="mb-6 font-slab text-2xl font-bold">Вам також сподобається</h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="no-scrollbar -mx-4 flex snap-x scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-4">
           {PRODUCTS.filter((p) => p.slug !== product.slug)
             .slice(0, 4)
             .map((p) => (
-              <ProductCard key={p.slug} product={p} />
+              <div key={p.slug} className="w-[78vw] max-w-[290px] shrink-0 snap-start sm:w-auto sm:max-w-none">
+                <ProductCard product={p} />
+              </div>
             ))}
         </div>
       </section>

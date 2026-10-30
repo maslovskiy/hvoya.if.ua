@@ -1,8 +1,15 @@
-// PROTOTYPE — floating variant switcher. Dev-only; never ships.
+// PROTOTYPE — floating variant switcher. Shown in dev and in the review deploy; never in a real build.
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useCart } from "../cart";
 
 export type VariantDef = { key: string; name: string };
+
+// Shown in dev, and in the review deploy (VITE_PROTOTYPE_SWITCHER=true in .env.production).
+const ENABLED = import.meta.env.DEV || import.meta.env.VITE_PROTOTYPE_SWITCHER === "true";
+
+/** Height the bar occupies (44px pill + 20px offset + breathing room). Pages read it via var(--switcher-space). */
+const SPACE = "76px";
 
 export function useVariant(variants: VariantDef[]) {
   const [params] = useSearchParams();
@@ -12,6 +19,7 @@ export function useVariant(variants: VariantDef[]) {
 
 export function PrototypeSwitcher({ variants, page }: { variants: VariantDef[]; page: string }) {
   const [params, setParams] = useSearchParams();
+  const { open: cartOpen } = useCart();
   const current = useVariant(variants);
   const idx = variants.findIndex((v) => v.key === current);
 
@@ -34,18 +42,27 @@ export function PrototypeSwitcher({ variants, page }: { variants: VariantDef[]; 
     return () => window.removeEventListener("keydown", onKey);
   });
 
-  // Shown in dev, and in the review deploy (VITE_PROTOTYPE_SWITCHER=true in .env.production). Never in a real build.
-  if (!import.meta.env.DEV && import.meta.env.VITE_PROTOTYPE_SWITCHER !== "true") return null;
+  // Reserve room at the bottom so page-end buttons and sticky bars are never hidden behind the bar.
+  useEffect(() => {
+    if (!ENABLED) return;
+    document.documentElement.style.setProperty("--switcher-space", SPACE);
+    return () => {
+      document.documentElement.style.removeProperty("--switcher-space");
+    };
+  }, []);
+
+  if (!ENABLED || cartOpen) return null;
 
   return (
-    <div className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full bg-black px-2 py-1.5 font-mono text-xs text-white shadow-[0_8px_30px_rgba(0,0,0,.45)] ring-2 ring-yellow-300">
-      <button type="button" onClick={() => go(-1)} className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/15" aria-label="Попередній варіант">
+    <div className="fixed bottom-4 left-1/2 z-50 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-1 rounded-full bg-black px-1.5 py-1.5 font-mono text-xs text-white shadow-[0_8px_30px_rgba(0,0,0,.45)] ring-2 ring-yellow-300">
+      <button type="button" onClick={() => go(-1)} className="grid h-8 w-8 shrink-0 place-items-center rounded-full hover:bg-white/15" aria-label="Попередній варіант">
         ←
       </button>
-      <span className="whitespace-nowrap px-2 text-center">
-        <span className="text-yellow-300">{page}</span> · Варіант {current} — {variants[idx].name} · {idx + 1}/{variants.length}
+      <span className="truncate whitespace-nowrap px-1 text-center sm:px-2">
+        <span className="hidden text-yellow-300 sm:inline">{page} · </span>
+        <span className="text-yellow-300 sm:text-white">{current}</span> — {variants[idx].name} · {idx + 1}/{variants.length}
       </span>
-      <button type="button" onClick={() => go(1)} className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/15" aria-label="Наступний варіант">
+      <button type="button" onClick={() => go(1)} className="grid h-8 w-8 shrink-0 place-items-center rounded-full hover:bg-white/15" aria-label="Наступний варіант">
         →
       </button>
     </div>

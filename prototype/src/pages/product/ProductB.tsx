@@ -38,9 +38,9 @@ export function ProductB({ product }: { product: Product }) {
 
   return (
     <main className="pb-40">
-      <section className="mx-auto grid max-w-7xl gap-8 px-6 pt-8 lg:grid-cols-[1.4fr_1fr]">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 pt-4 sm:px-6 sm:pt-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         {/* Stage */}
-        <div className="relative h-[70vh] min-h-[480px] overflow-hidden rounded-[2rem]" style={{ background: KIND_BG[product.kind] }}>
+        <div className="relative h-[62vh] min-h-[420px] min-w-0 overflow-hidden rounded-[2rem] sm:h-[70vh] sm:min-h-[480px]" style={{ background: KIND_BG[product.kind] }}>
           {/* ruler */}
           <div className="absolute inset-y-8 left-6 w-10">
             {[0.5, 1, 1.5, 2, 2.5, 3].map((m) => (
@@ -79,7 +79,7 @@ export function ProductB({ product }: { product: Product }) {
         <div className="flex flex-col gap-8 py-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-pine">{cat.title}</p>
-            <h1 className="mt-2 font-slab text-4xl font-extrabold leading-tight">{product.name}</h1>
+            <h1 className="mt-2 font-slab text-3xl font-extrabold leading-tight sm:text-4xl">{product.name}</h1>
             <p className="mt-3 text-slate/60">{product.blurb}</p>
           </div>
 
@@ -107,7 +107,7 @@ export function ProductB({ product }: { product: Product }) {
 
           <div>
             <p className="mb-3 font-bold">2. Інші моделі цього типу</p>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {siblings.map((p) => (
                 <button
                   key={p.slug}
@@ -139,7 +139,7 @@ export function ProductB({ product }: { product: Product }) {
         </div>
       </section>
 
-      <section className="mx-auto mt-20 max-w-7xl px-6">
+      <section className="mx-auto mt-16 max-w-7xl px-4 sm:mt-20 sm:px-6">
         <h2 className="mb-6 font-slab text-2xl font-bold">Що в коробці</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -158,7 +158,7 @@ export function ProductB({ product }: { product: Product }) {
       </section>
 
       {/* Sticky buy bar */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate/10 bg-white/95 pb-16 backdrop-blur md:pb-0">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate/10 bg-white/95 backdrop-blur" style={{ paddingBottom: "var(--switcher-space, 0px)" }}>
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-6 py-4">
           <div className="mr-auto min-w-0">
             <p className="truncate text-xs text-slate/50">

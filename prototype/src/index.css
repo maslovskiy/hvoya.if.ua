@@ -25,6 +25,9 @@ html {
 
 body {
   @apply bg-frost-50 text-slate font-sans antialiased;
+  /* room for the prototype switcher (set by PrototypeSwitcher; 0 when hidden) */
+  padding-bottom: var(--switcher-space, 0px);
+  overflow-x: clip;
 }
 
 @keyframes snowfall {

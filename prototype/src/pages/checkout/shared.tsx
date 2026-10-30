@@ -69,23 +69,29 @@ export function Field({ label, children, hint }: { label: string; children: Reac
 }
 
 export const inputCls =
-  "w-full rounded-xl bg-white px-4 py-3 text-[15px] ring-1 ring-slate/15 outline-none transition placeholder:text-slate/35 focus:ring-2 focus:ring-pine";
+  "w-full min-w-0 rounded-xl bg-white px-4 py-3 text-base ring-1 ring-slate/15 outline-none transition placeholder:text-slate/35 focus:ring-2 focus:ring-pine";
 
 export function Choice({ checked, onSelect, title, sub, right }: { checked: boolean; onSelect: () => void; title: string; sub?: string; right?: string }) {
   return (
     <button
       type="button"
       onClick={onSelect}
-      className={`flex w-full items-center gap-4 rounded-2xl p-4 text-left transition ${checked ? "bg-white ring-2 ring-pine" : "bg-white/60 ring-1 ring-slate/10 hover:ring-slate/30"}`}
+      className={`flex w-full items-center gap-3 rounded-2xl p-4 text-left sm:gap-4 transition ${checked ? "bg-white ring-2 ring-pine" : "bg-white/60 ring-1 ring-slate/10 hover:ring-slate/30"}`}
     >
       <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-full ring-2 ${checked ? "ring-pine" : "ring-slate/25"}`}>
         {checked && <span className="h-2.5 w-2.5 rounded-full bg-pine" />}
       </span>
-      <span className="flex-1">
+      <span className="min-w-0 flex-1">
         <span className="block font-semibold">{title}</span>
-        {sub && <span className="block text-xs text-slate/50">{sub}</span>}
+        {sub && (
+          <span className="block text-xs text-slate/50">
+            {sub}
+            {/* on phones the price sits under the title instead of a cramped right column */}
+            {right && <span className="font-semibold text-slate/70 sm:hidden"> · {right}</span>}
+          </span>
+        )}
       </span>
-      {right && <span className="text-sm font-semibold text-slate/70">{right}</span>}
+      {right && <span className="hidden shrink-0 text-right text-sm font-semibold text-slate/70 sm:block">{right}</span>}
     </button>
   );
 }
@@ -143,7 +149,7 @@ export function Totals({ c }: { c: Checkout }) {
 export function PromoInput({ c }: { c: Checkout }) {
   return (
     <div className="flex gap-2">
-      <input value={c.f.promo} onChange={(e) => c.set("promo", e.target.value)} placeholder="Промокод (спробуйте HVOYA10)" className={inputCls} />
+      <input value={c.f.promo} onChange={(e) => c.set("promo", e.target.value)} placeholder="Промокод: HVOYA10" className={inputCls} />
       <button
         type="button"
         onClick={() => c.set("promoApplied", c.f.promo.trim().toUpperCase() === "HVOYA10")}
